@@ -1,9 +1,9 @@
 # semanticSegmentation
 Semantic segmentation of  remotely sensing images
-torchvision
-============
+## Prerequests
 
-.. image:: https://travis-ci.org/pytorch/vision.svg?branch=master
-    :target: https://travis-ci.org/pytorch/vision
+## Generating samples for training/validation/test sets
+First, you need to generate the samples needed for training,validation or testing the network.
 
-The torchvision package consists of popular datasets, model architectures, and common image transformations for computer vision.
+
+
