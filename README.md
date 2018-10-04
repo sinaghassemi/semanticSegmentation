@@ -20,3 +20,7 @@ The codes used to generate the datasets files are written in MATLAB and provided
 ## Training/Testing the network
 
 After the ".h5" files are generated, training the network can be proceeded. The correspondig files are written in the python it uses PyTorch.
+
+```bash
+mkdir celebA; cd celebA
+```
