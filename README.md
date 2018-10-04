@@ -30,3 +30,16 @@ Or, the trained network can be evaluted over a test area:
 ```bash
 python main.py --experiment ex1 --depth 152 --batchSize 8 --imageSize 360 --patchSize 256 --nChannelsIn 3 --nChannelsOut 2 --dataset inria --testModule nets/trainedNetwork.pt --set test
 ```
+
+## Some Examples
+
+The segmentation map over a tile from INRIA dataset:
+
+**INRIA**
+![Alt text](D12.png?raw=true "Title")
+
+
+
+
+
+
