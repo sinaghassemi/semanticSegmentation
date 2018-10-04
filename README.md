@@ -36,7 +36,7 @@ python main.py --experiment ex1 --depth 152 --batchSize 8 --imageSize 360 --patc
 The segmentation map over a tile from INRIA dataset:
 
 **INRIA**
-![Alt text](D12.png?raw=true "Title")
+![Alt text](images/prediction_allClasses_isprs_vaihingen11.tif?raw=true "Title")
 
 
 
