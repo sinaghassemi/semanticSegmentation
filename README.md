@@ -21,6 +21,12 @@ The codes used to generate the datasets files are written in MATLAB and provided
 
 After the ".h5" files are generated, training the network can be proceeded. The correspondig files are written in the python it uses PyTorch.
 
+For example, to train the network with depth of 152 layers in encoder, over inria datsets:
+
 ```bash
-mkdir celebA; cd celebA
+python main.py --fileNameData dataset_inria.h5 --experiment ex1 --depth 152 --batchSize 16 --imageSize 360 --patchSize 256 --nChannelsIn 3 --nChannelsOut 2 --dataset inria  
+```
+Or, the trained network can be evaluted over a test area:
+```bash
+python main.py --experiment ex1 --depth 152 --batchSize 8 --imageSize 360 --patchSize 256 --nChannelsIn 3 --nChannelsOut 2 --dataset inria --testModule nets/trainedNetwork.pt --set test
 ```
