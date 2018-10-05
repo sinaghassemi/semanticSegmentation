@@ -17,6 +17,14 @@ The codes used to generate the datasets files are written in MATLAB and provided
 1. [To generate samples of INRIA Dataset](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/GeneratingDataset_INRIA.m)
 2. [To generate samples of Vaihingen Dataset](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/GeneratingDataset_ISPRS.m)
 
+### Generating samples of INRIA dataset
+INRIA dataset includes 5 cities for train and validation samples and another 5 cities for the test samples.
+We invite readers interested in more details to refer to this [link](https://project.inria.fr/aerialimagelabeling/contest/).
+The generate the training and validation samples we developed following MATLAB [code](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/GeneratingDataset_INRIA.m)
+For cities in the first set (Austin, Chicago, Kitsap County, Western Tyrol, Vienna) , we use the first five images of each city for extracting validation samples and the rest for training samples.
+
+
+
 ## Training/Testing the network
 
 After the ".h5" files are generated, training the network can be proceeded. The correspondig files are written in the python it uses PyTorch.
