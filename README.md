@@ -19,9 +19,11 @@ The codes used to generate the datasets files are written in MATLAB and provided
 
 ### Generating samples of INRIA dataset
 INRIA dataset includes 5 cities for train and validation samples and another 5 cities for the test samples.
-
 We invite readers interested in more details to refer to this [link](https://project.inria.fr/aerialimagelabeling/contest/).
 
+
+
+#### Training and validation
 The generate the training and validation samples we developed following MATLAB [code](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/GeneratingDataset_INRIA.m) .
 
 For cities in the first set (Austin, Chicago, Kitsap County, Western Tyrol, Vienna) , we use the first five images of each city for extracting validation samples and the rest for training samples.
@@ -36,8 +38,20 @@ city = 'bellingham';
 % test = {'bellingham','bloomington','innsbruck','sfo','tyrol-e'}
 ```
 For each city first train and then validation samples should be extracted.
-Note that mean and std of samples are compuited over training samples and also use for ectracitng validation samples.
+Note that mean and std of samples are compuited over training samples and also use for extracitng validation samples.
+This justify the first line in code:
+```matlab
+clearvars -except patchMean patchSTD
+```
+The training and validation samples of each city are stored in a separate file.
+Then this [code](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/combiningCitiesToADataset_inria.m)  is used to combine the samples of all cities into a single file.
 
+#### Test
+
+To generate the test samples enabling the evaluation of network performance, there are two choices: using the validation images. using the test images.
+Since the annotation of test images are not provided we can use validation images as test set to be able measure network performance. However, by using test images, the network outputs should sent to dataset provider for analysis.
+By setting the flag 'set' to 'test' and using validation areas and setting the flag 'withAnnotation' to 1, test samples are generated from validation images.
+While using test areas and setting the flag 'withAnnotation' to 0, test samples are generated from test images.
 
 
 
