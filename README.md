@@ -19,9 +19,25 @@ The codes used to generate the datasets files are written in MATLAB and provided
 
 ### Generating samples of INRIA dataset
 INRIA dataset includes 5 cities for train and validation samples and another 5 cities for the test samples.
+
 We invite readers interested in more details to refer to this [link](https://project.inria.fr/aerialimagelabeling/contest/).
-The generate the training and validation samples we developed following MATLAB [code](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/GeneratingDataset_INRIA.m)
+
+The generate the training and validation samples we developed following MATLAB [code](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/GeneratingDataset_INRIA.m) .
+
 For cities in the first set (Austin, Chicago, Kitsap County, Western Tyrol, Vienna) , we use the first five images of each city for extracting validation samples and the rest for training samples.
+
+In first line of the code, the path to inria images shoud be defined, next the variable 'set' should be set to 'train' and then city should be selected. 
+
+```matlab
+path = 'AerialImageDataset/test/'  ; %Path to the data 
+set  = 'test'                      ; %Extracting samples for 'val' | 'train' | 'test' set 
+city = 'bellingham';                                           
+% train and val = {'austin','chicago','kitsap','tyrol-w','vienna'}
+% test = {'bellingham','bloomington','innsbruck','sfo','tyrol-e'}
+```
+For each city first train and then validation samples should be extracted.
+Note that mean and std of samples are compuited over training samples and also use for ectracitng validation samples.
+
 
 
 
