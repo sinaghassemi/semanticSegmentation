@@ -1,10 +1,11 @@
 # Semantic segmentation of remotely sensing images
-This repository provides the codes to address the semantic segmentation problem over two publicly available aerial images.
-The codes are divided into two folders: one is to generate samples and the other is to train or test the proposed network.
+This repository provides the codes needed to address the semantic segmentation problem over two publicly available aerial images.
 
-## Required software
+## Prerequesties
+- Computer with Linux
 - [MATLAB](https://www.mathworks.com/)
 - [PyTorch](https://pytorch.org/)
+- NVIDIA GPU is highly recommended for speed particularly for training.
 
 ## Generating samples for training/validation/test sets
 Two publicly available datasets are used in our experiments:
