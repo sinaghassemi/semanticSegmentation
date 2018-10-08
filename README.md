@@ -1,13 +1,14 @@
 # Semantic segmentation of remotely sensing images
 This repository provides the codes needed to address the semantic segmentation problem over two publicly available aerial images.
+-[Generating samples](#1-generating-samples-for-training/validation/test-sets)
 
 ## Prerequesties
 - Computer with Linux
 - [MATLAB](https://www.mathworks.com/)
 - [PyTorch](https://pytorch.org/)
-- NVIDIA GPU is highly recommended for speed particularly for training.
+- NVIDIA GPU is highly recommended particularly to speed up the training.
 
-## Generating samples for training/validation/test sets
+# 1. Generating samples for training/validation/test sets
 Two publicly available datasets are used in our experiments:
 
 1. [Inria Aerial Image Labeling Dataset](https://project.inria.fr/aerialimagelabeling/)
@@ -18,13 +19,13 @@ The codes used to generate the datasets files are written in MATLAB and provided
 1. [To generate samples of INRIA Dataset](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/GeneratingDataset_INRIA.m)
 2. [To generate samples of Vaihingen Dataset](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/GeneratingDataset_ISPRS.m)
 
-### Generating samples of INRIA dataset
+## 1.1 Generating samples of INRIA dataset
 INRIA dataset includes 5 cities for train and validation samples and another 5 cities for the test samples.
 We invite readers interested in more details to refer to this [link](https://project.inria.fr/aerialimagelabeling/contest/).
 
 
 
-#### Training and validation
+### 1.1.1 Training and validation
 The generate the training and validation samples we developed following MATLAB [code](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/GeneratingDataset_INRIA.m) .
 
 For cities in the first set (Austin, Chicago, Kitsap County, Western Tyrol, Vienna) , we use the first five images of each city for extracting validation samples and the rest for training samples.
@@ -47,13 +48,19 @@ clearvars -except patchMean patchSTD
 The training and validation samples of each city are stored in a separate file.
 Then this [code](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/combiningCitiesToADataset_inria.m)  is used to combine the samples of all cities into a single file.
 
-#### Test
+### 1.1.1 Test
 
 To generate the test samples enabling the evaluation of network performance, there are two choices: using the validation images. using the test images.
 Since the annotation of test images are not provided we can use validation images as test set to be able measure network performance. However, by using test images, the network outputs should sent to dataset provider for analysis.
 By setting the flag 'set' to 'test' and using validation areas and setting the flag 'withAnnotation' to 1, test samples are generated from validation images.
 While using test areas and setting the flag 'withAnnotation' to 0, test samples are generated from test images.
 
+## 1.2 Generating samples of ISPRS Vaihigen dataset
+
+### 1.2.1 Training and validation
+
+
+### 1.2.2 Test
 
 
 ## Training/Testing the network
