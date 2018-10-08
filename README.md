@@ -67,12 +67,30 @@ To generate test samples from validation images, 'set' should be set to 'test' `
 To generate test samples from test images, 'set' should be set to 'test' ```set  = 'test'```, city can be chosen from the second set which are not provided with annotation ```city = 'bellingham' %{'bellingham','bloomington','innsbruck','sfo','tyrol-e'}```, and in the section "Configurations for each set" and the test configurations, ```areas=[1,2,...,36]``` and ```withAnnotation = 0```.
 
 
-## 1.2 Generating samples of ISPRS Vaihigen dataset
+## 1.3 Training and validation (ISPRS Vaihingen)
+For this dataset, the city of Vaihingen is selected to extracted traning, validation and also test samples.
+The city is divided into two sets, one is provided with annotations and used to extract training and validation samples while the second set are not provided with annotation and used to generate test samples.
 
-### 1.2.1 Training and validation
+Using a MTALAB [code](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/GeneratingDataset_ISPRS.m)
+, the first lines define the configurations:
+
+```matlab
+%% CONFIGURATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+folderPath ='/ISPRS_semantic_labeling_Vaihingen';	% Path to the data 
+set = 'train'; 						                        %  set flag can be set to 'val' | 'train' | 'test' to generate the corresponding samples
+hdf5Filename ='vaihingen.h5';				              % The h5 file in which samples will be stored  
+DataFormat = 'uint8'; 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+```
+First traning samples are extracted ```set = 'train'``` and the validation samples are generated ```set = 'val'```.
 
 
-### 1.2.2 Test
+## 1.4 Test (ISPRS Vaihingen)
+
+The same as INRIA dataset, since a set of images are not provided with annotations and reserved as test set, and they can be extracted by setting the falg ```set = 'test'```. The network outout then should be sent to dataset organizer for further assessments.
+
+However, also it is possible to extracted test samples from validation areas.
+After setting the flag ```set = 'test'```, in the "Configurations for each set" section and in the test part, ``` area = [11,15,28,30,34] ``` defines the test areas to be the same as validation areas, then the flage ```  withAnnotation = 1 ``` indicates the this set should be extarcted with annotation. Therefore we can measure the network performance using the provided annotations and over validation images.
 
 
 # 2. Training the network
