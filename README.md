@@ -32,16 +32,24 @@ and Vienna using the MATLAB [code](https://github.com/sinaghassemi/semanticSegme
 Each city includes 36 images sized 5000×5000 which covers a surface of 1500 m × 1500 m at the 30 cm resolution.
 Based on recommnedation of the dataset providers, we use the first five images of each city for extracting validation samples and the rest for training samples.
 
-In first line of the code, the path to inria images shoud be defined, next the variable 'set' should be set to 'train' and then city should be selected. 
+In first lines of the code, in the configuration section, there are some variable that should be set.  
 
 ```matlab
-path = 'AerialImageDataset/test/'  ; %Path to the data 
-set  = 'test'                      ; %Extracting samples for 'val' | 'train' | 'test' set 
-city = 'bellingham';                                           
+%% CONFIGURATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+path = '/AerialImageDataset/test/';     % Path to the data 
+set  = 'train';                         % set flag can be set to 'val' | 'train' | 'test' to generate the corresponding samples
+
 % train and val = {'austin','chicago','kitsap','tyrol-w','vienna'}
-% test = {'bellingham','bloomington','innsbruck','sfo','tyrol-e'}
+% test          = {'bellingham','bloomington','innsbruck','sfo','tyrol-e'}
+
+city = 'bellingham';                % can be selected from the list above
+hdf5Filename = strcat(city,'.h5');  % The h5 file in which samples will be stored         
+datatype_patch = 'uint8';           % The data format 
+datatype_label = 'uint8';           % The data format 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ```
-For each city first train and then validation samples should be extracted.
+First the path to the dataset have to be assign to variable '''matlab path '''.
+For each city use for training/validatio, first train and then validation samples should be extracted.
 Note that mean and std of samples are compuited over training samples and also use for extracitng validation samples.
 This justify the first line in code:
 ```matlab
