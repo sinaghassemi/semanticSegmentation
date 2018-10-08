@@ -4,11 +4,13 @@ This repository provides the codes needed to address the semantic segmentation p
 1. [Inria Aerial Image Labeling Dataset](https://project.inria.fr/aerialimagelabeling/)
 2. [ISPRS Vaihingen Dataset](http://www2.isprs.org/commissions/comm3/wg4/2d-sem-label-vaihingen.html)
 
-First training, validation and test samples are extracted from these datasets. Then the extracted samples are stored in [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file enabling fast data reading during training. Next, these files can be used to train a encoder-decoder convolutional network. After training, the network is ready to be deployed over test area.
-
-
+First training, validation and test samples are extracted from these datasets. Then the extracted samples are stored in [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file enabling fast data reading during training. The instruction required to generate samples are provided in the following section:
 - [Generating samples](#1-generating-samples-for-training/validation/test-sets)
+
+Next, the HDF5 files can be used to train a encoder-decoder convolutional network using instructions provided at the following section:
 - [Training](#2-training-the-network)
+
+At the end, the trained network is ready to be deployed over test area using the instruction in this following section:
 - [Testing](#3-testing-the-trained-network)
 
 # Prerequesties
