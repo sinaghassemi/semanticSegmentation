@@ -5,7 +5,7 @@ This repository contains the codes which address the semantic segmentation on re
 2. [ISPRS Vaihingen Dataset](http://www2.isprs.org/commissions/comm3/wg4/2d-sem-label-vaihingen.html)
 
 To be able to train and test the proposed network, first training, validation and test samples should be extracted from these datasets. Then the extracted samples must stored in [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file which enables fast data reading during training. The instruction required to generate the samples are provided in the following section:
-- [Generating samples](#1-generating-samples-for-training/validation/test-sets)
+- [Generating samples](#1-generating-training,-validation-and-test-samples)
 
 Next, after the HDF5 files are prepared, we can proceed to train the proposed network using instructions provided at the following section:
 - [Training](#2-training-the-network)
@@ -19,7 +19,7 @@ At the end, when the training course has been completed, the trained network can
 - [PyTorch](https://pytorch.org/)
 - NVIDIA GPU is highly recommended to speed up the training.
 
-# 1. Generating samples for training/validation/test sets
+# 1. Generating training, validation and test samples
 Two publicly available datasets are used in our experiments:
 
 1. [Inria Aerial Image Labeling Dataset](https://project.inria.fr/aerialimagelabeling/)
