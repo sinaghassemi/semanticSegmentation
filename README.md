@@ -5,7 +5,7 @@ This repository provides the codes needed to address the semantic segmentation p
 -[Generating samples](#1-generating-samples-for-training/validation/test-sets)
 -[Generating ](####-122-test)
 
-## Prerequesties
+# Prerequesties
 - Computer with Linux
 - [MATLAB](https://www.mathworks.com/)
 - [PyTorch](https://pytorch.org/)
