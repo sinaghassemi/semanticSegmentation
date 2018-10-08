@@ -26,10 +26,10 @@
 
 clearvars -except patchMean patchSTD
 
-path = '/home/sina/satteliteImage/AerialImageDataset/test/' ; %Path to the data 
-set  = 'test'                                              ; %Extracting samples for 'val' | 'train' | 'test' set 
+path = '/AerialImageDataset/test/'    ; %Path to the data 
+set  = 'test'                         ; %Extracting samples for 'val' | 'train' | 'test' set 
 
-city = 'bellingham'                                            ;%train and val = {'austin','chicago','kitsap','tyrol-w','vienna'};test = {'bellingham','bloomington','innsbruck','sfo','tyrol-e'}
+city = 'bellingham'                   ;%train and val = {'austin','chicago','kitsap','tyrol-w','vienna'};test = {'bellingham','bloomington','innsbruck','sfo','tyrol-e'}
 hdf5Filename = strcat(city,'.h5');
 NrTemp = 1500;        
 datatype_patch = 'uint8'; 
