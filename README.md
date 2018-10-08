@@ -4,6 +4,7 @@ This repository provides the codes needed to address the semantic segmentation p
 
 - [Generating samples](#1-generating-samples-for-training/validation/test-sets)
 - [Training](#2-training-the-network)
+- [Testing](#3-testing-the-trained-network)
 
 # Prerequesties
 - Computer with Linux
@@ -51,7 +52,7 @@ clearvars -except patchMean patchSTD
 The training and validation samples of each city are stored in a separate file.
 Then this [code](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/combiningCitiesToADataset_inria.m)  is used to combine the samples of all cities into a single file.
 
-### 1.1.1 Test
+### 1.1.2 Test
 
 To generate the test samples enabling the evaluation of network performance, there are two choices: using the validation images. using the test images.
 Since the annotation of test images are not provided we can use validation images as test set to be able measure network performance. However, by using test images, the network outputs should sent to dataset provider for analysis.
@@ -100,6 +101,10 @@ Or, the trained network can be evaluted over a test area:
 ```bash
 python main.py --experiment ex1 --depth 152 --batchSize 8 --imageSize 360 --patchSize 256 --nChannelsIn 3 --nChannelsOut 2 --dataset inria --testModule nets/trainedNetwork.pt --set test
 ```
+
+
+# 3. Testing the trained network
+
 
 ## Some Examples
 
