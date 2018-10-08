@@ -23,22 +23,33 @@
 
 
 clearvars -except patchMean patchSTD
-folderPath ='/home/sina/satteliteImage/matlab/ISPRS_semantic_labeling_Vaihingen'; %Path to the data 
-hdf5Filename ='vaihingen.h5';
-set = 'test'                                                                    ; %'val' | 'train' | 'test' ;%Extracting samples for 'val' | 'train' | 'test' set
+% To generate train and validation samples, first the training samples should be extracted (set  = 'train'),
+% In which mean and std of samples are computed, then the validation samples are extracted (set  = 'val'),
+% As a result "clearvars -except patchMean patchSTD" prevents removing mean and std which are computed in first run,
+% And these values are also used in the second run.
 
 
+%% CONFIGURATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+folderPath ='/ISPRS_semantic_labeling_Vaihingen';	% Path to the data 
+set = 'train'; 						%  set flag can be set to 'val' | 'train' | 'test' to generate the corresponding samples
+hdf5Filename ='vaihingen.h5';				% The h5 file in which samples will be stored  
+DataFormat = 'uint8'; 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 nClasses = 6;        
-NrTemp = 500;        
-DataFormat = 'uint8'; 
-weights=[];
+NrTemp = 500; 
 patches=[];
 information=[];
 masks=[];
 
+
+%% Configurations for each set %%%%%%%%%%%%%%%%%%%%%%%%%
+
+% For each set different configurations are used
+
+
 if strcmp(set,'train')
-    area = [1,3]%,5,7,13,17,21,23,26,32,37];
+    area = [1,3,5,7,13,17,21,23,26,32,37]; %Training areas
     hdf5_data='/train_data';
     hdf5_mask='/train_mask';
     patchSize=364;          
@@ -48,7 +59,7 @@ if strcmp(set,'train')
 end
 
 if strcmp(set,'val')
-    area = [11]%,15,28,30,34];
+    area = [11,15,28,30,34]; % Validation areas
     hdf5_data='/val_data';
     hdf5_mask='/val_mask';
     patchSize=256;
@@ -58,7 +69,7 @@ if strcmp(set,'val')
 end
 
 if strcmp(set,'test')
-    area = [2] %[2,4,6,8,10,12,14,16,20,22,24,27,29,31,33,35,38];
+    area = [2,4,6,8,10,12,14,16,20,22,24,27,29,31,33,35,38]; % Test areas
     hdf5_data='/data';
     hdf5_mask='/mask';
     patchSize=512; 
@@ -67,12 +78,15 @@ if strcmp(set,'test')
     chunkSize=1;
     withAnnotation = 0;
 end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 chunkSizeData=[chunkSize 4 patchSize patchSize];
 chunkSizeMask=[chunkSize patchSize patchSize];
 
 
 for area_index=1:size(area,2) 
+    %% Reading the file %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     sprintf('reading Channels:')
     top_path = strcat(folderPath,'/top/top_mosaic_09cm_area',int2str(area(area_index)),'.tif')
     dsm_path = strcat(folderPath,'/dsm/dsm_09cm_matching_area',int2str(area(area_index)),'.tif')
@@ -93,27 +107,25 @@ for area_index=1:size(area,2)
         m=zeros(size(r,1),size(r,2)); 
     end
     sprintf('done!')
+    %% Showing the image with labeled buildings %%%%%%%%%%%%
     im(:,:,1)=r; 
     im(:,:,2)=g;
     im(:,:,3)=b;
     imshow(im)
     %pause()
     clear im
-
-    %%%%%%%%%%%%%%%%%%%% computing translations to cover whole image %%%%%%%%%
+    %% computing translations to cover whole image %%%%%%%%%
     heightofArea = size(m,1); 
     widthofArea  = size(m,2);
     numebrOfpathces_height = ceil(((heightofArea - patchSize) / translation) + 1); 
     numebrOfpathces_width = ceil(((widthofArea - patchSize) / translation) + 1);
     sprintf('numebrOfpathces_height:%d numebrOfpathces_width:%d heightofArea:%d widthofArea:%d',numebrOfpathces_height,numebrOfpathces_width,heightofArea,widthofArea)
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% Extracting patches %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     rot = 0;
     translation_h = translation;
     translation_w = translation;
-    %%%  extracting whole image
     [ patches_temp,masks_temp,information] = ExtractPatches({r,g,b,a},m,patchSize,translation_h,translation_w,NrTemp,DataFormat,DataFormat);
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %Show image
+    %% Show image with extracted patches%%%%%%%%%%%%%%%%%%%%%
     im(:,:,1)=r; 
     im(:,:,2)=g;
     for nc = 1:nClasses
@@ -123,10 +135,10 @@ for area_index=1:size(area,2)
          %pause()
     end
     clear im
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% Concatanating patches and masks
     patches=cat(1,patches,patches_temp);
     masks=cat(1,masks,masks_temp);
-    % Test Patches%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    % Test Patches %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     if strcmp(set,'test')
         if withAnnotation
             name = strcat('fullMask_isprs_vaihingen',int2str(area(area_index)),'.mat');
@@ -155,14 +167,12 @@ for area_index=1:size(area,2)
             h5write(hdf5Filename, '/mean', patchMean)
             h5write(hdf5Filename, '/std', patchSTD)   
     end
-    %%%%%%%%%%%%%%%%%%%%
     clear r g b m a
     clear im temp_data temp_mask temp_information
-%unique(masks)
 end
 
 
-% Train and Val%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Train and Val %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if strcmp(set,'train') || strcmp(set,'val')
 
