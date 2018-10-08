@@ -138,63 +138,46 @@ For examples using the following commands in terminal:
 ```bash
 python main.py --fileNameData inria.h5 --experiment 1 --depth 50 --imageSize 360 --patchSize 256 --nChannelsIn 3 --nChannelsOut 2 --dataset inria
 ```
-Will train the network with 50 layers in encoder over INRIA dataset.
+to train the network with 50 layers over INRIA dataset.
 
 Or running the following in terminal
 
 ```bash
 python main.py --fileNameData vaihingen.h5 --experiment 2 --depth 50 --imageSize 364 --patchSize 256 --nChannelsIn 4 --nChannelsOut 6 --dataset isprs
 ```
-will train the network over Vihingen city.
-
-
-
-
-
-```bash
-INRIA TRAINING
-CUDA_VISIBLE_DEVICES=1 python main.py --fileNameData inria.h5 --experiment 1 --depth 50 --imageSize 360 --patchSize 256 --nChannelsIn 3 --nChannelsOut 2 --dataset inria
--------------------
-INRIA TEST ON Val Set
-CUDA_VISIBLE_DEVICES=1 python main.py --experiment 1 --depth 50  --nChannelsIn 3 --nChannelsOut 2 --dataset inria --testModule ex1_bestNet_valF1.pt --set val  --batchSize 4
--------------------------
-INRIA TEST ON Test Set
-CUDA_VISIBLE_DEVICES=1 python main.py --experiment 1 --depth 50  --nChannelsIn 3 --nChannelsOut 2 --dataset inria --testModule ex1_bestNet_valF1.pt --set test --batchSize 4
-ISPRS TRAINING
-CUDA_VISIBLE_DEVICES=1 python main.py --fileNameData vaihingen.h5 --experiment 2 --depth 50 --imageSize 364 --patchSize 256 --nChannelsIn 4 --nChannelsOut 6 --dataset isprs
--------------------
-ISPRS TEST ON Val Set
-CUDA_VISIBLE_DEVICES=1 python main.py --experiment 2 --depth 50  --nChannelsIn 4 --nChannelsOut 6 --dataset isprs --testModule ex2_bestNet_valF1.pt --set val --batchSize 4
--------------------
-ISPRS TEST ON Test Set
-CUDA_VISIBLE_DEVICES=1 python main.py --experiment 2 --depth 50  --nChannelsIn 4 --nChannelsOut 6 --dataset isprs --testModule ex2_bestNet_valF1.pt --set test  --batchSize 4
-
-```
-
-
-
-After the ".h5" files are generated, training the network can be proceeded. The correspondig files are written in the python it uses PyTorch.
-
-For example, to train the network with depth of 152 layers in encoder, over inria datsets:
-
-```bash
-python main.py --fileNameData dataset_inria.h5 --experiment ex1 --depth 152 --batchSize 16 --imageSize 360 --patchSize 256 --nChannelsIn 3 --nChannelsOut 2 --dataset inria  
-```
-Or, the trained network can be evaluted over a test area:
-```bash
-python main.py --experiment ex1 --depth 152 --batchSize 8 --imageSize 360 --patchSize 256 --nChannelsIn 3 --nChannelsOut 2 --dataset inria --testModule nets/trainedNetwork.pt --set test
-```
-
+to train the network over Vihingen city.
 
 # 3. Testing the trained network
+
+After training has been completed, it can be evaluted over validation images or test images.
+
+For instance, running the following 
+```bash
+python main.py --experiment 1 --depth 50  --nChannelsIn 3 --nChannelsOut 2 --dataset inria --testModule ex1_bestNet_valF1.pt --set val  --batchSize 4
+```
+Evalute the trained network of ```ex1_bestNet_valF1.pt``` over validation set of INRIA dataset.
+
+Or:
+
+```bash
+python main.py --experiment 2 --depth 50  --nChannelsIn 4 --nChannelsOut 6 --dataset isprs --testModule ex2_bestNet_valF1.pt --set val --batchSize 4
+```
+Evalute the trained network of ```ex2_bestNet_valF1.pt``` over validation set of Vaihingen city.
+
+
+To test the network and generate the outputs over testset and for INRIA and Vaihingen datasets:
+```
+python main.py --experiment 1 --depth 50  --nChannelsIn 3 --nChannelsOut 2 --dataset inria --testModule ex1_bestNet_valF1.pt --set test --batchSize 4
+```
+```
+python main.py --experiment 2 --depth 50  --nChannelsIn 4 --nChannelsOut 6 --dataset isprs --testModule ex2_bestNet_valF1.pt --set test  --batchSize 4
+```
+
 
 
 ## Some Examples
 
-The segmentation map over a tile from INRIA dataset:
 
-**INRIA**
-![Alt text](images/prediction_allClasses_isprs_vaihingen11.tif)
 
 
 
