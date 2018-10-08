@@ -32,8 +32,8 @@ clearvars -except patchMean patchSTD
 
 
 %% CONFIGURATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-path = '/AerialImageDataset/test/'    ; % Path to the data 
-set  = 'test'                         ; % set flag can be set to 'val' | 'train' | 'test' to generate the corresponding samples
+path = '/AerialImageDataset/test/';     % Path to the data 
+set  = 'train';                         % set flag can be set to 'val' | 'train' | 'test' to generate the corresponding samples
 
 % train and val = {'austin','chicago','kitsap','tyrol-w','vienna'}
 % test          = {'bellingham','bloomington','innsbruck','sfo','tyrol-e'}
@@ -54,7 +54,7 @@ masks=[];
 % For each set different configurations are used
 
 if strcmp(set,'train')
-    areas=[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36];
+    areas=[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]; % Training areas
     hdf5_data='/train_data';
     hdf5_mask='/train_mask';
     patchSize=364;% 360         
@@ -65,7 +65,7 @@ if strcmp(set,'train')
 end
 
 if strcmp(set,'val')
-    areas=[1,2,3,4,5];
+    areas=[1,2,3,4,5]; % Validation areas
     hdf5_data='/val_data';
     hdf5_mask='/val_mask';
     patchSize=256; 
@@ -76,7 +76,7 @@ if strcmp(set,'val')
 end
 
 if strcmp(set,'test')
-    areas=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36];
+    areas=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]; % Test areas
     hdf5_data='/data';
     hdf5_mask='/mask';
     patchSize=1024; 
@@ -108,8 +108,6 @@ for iteration = 1:numberOfIteration
 
     for area_index=1:size(areas,2)
         area=areas(area_index)
-
-
         %% Reading the file %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         sprintf('reading Channels:')
         [imageData,~] = geotiffread(strcat(path,'images/',city,int2str(area),'.tif'));
@@ -153,9 +151,9 @@ for iteration = 1:numberOfIteration
         showPatches( im,information,patchSize)
         clear im
         % pause()
+        %% Concatanating patches and masks
         patches=cat(1,patches,patches_temp);
         masks=cat(1,masks,masks_temp);
-
         %% Test Patches %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         if strcmp(set,'test')
 
@@ -196,7 +194,7 @@ for iteration = 1:numberOfIteration
 end
 
 
-%% Train and Val %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Train and Val %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if strcmp(set,'train') || strcmp(set,'val')
 
