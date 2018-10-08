@@ -2,8 +2,8 @@
 This repository provides the codes needed to address the semantic segmentation problem over two publicly available aerial images.
 
 
--[Generating samples](#1-generating-samples-for-training/validation/test-sets)
--[Generating ](####-122-test)
+- [Generating samples](#1-generating-samples-for-training/validation/test-sets)
+- [Generating ](####-122-test)
 
 # Prerequesties
 - Computer with Linux
