@@ -48,7 +48,7 @@ datatype_patch = 'uint8';           % The data format
 datatype_label = 'uint8';           % The data format 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ```
-First the path to the dataset have to be assign to variable '''matlab path '''.
+First the path to the dataset have to be assign to variable ```matlab path ```.
 For each city use for training/validatio, first train and then validation samples should be extracted.
 Note that mean and std of samples are compuited over training samples and also use for extracitng validation samples.
 This justify the first line in code:
