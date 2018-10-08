@@ -1,8 +1,8 @@
 # Semantic segmentation of remotely sensing images
 The repository contains the codes addressing the semantic segmentation over remotely sensing images and on two publicly available aerial images:
 
-1. [Inria Aerial Image Labeling Dataset](https://project.inria.fr/aerialimagelabeling/)
-2. [ISPRS Vaihingen Dataset](http://www2.isprs.org/commissions/comm3/wg4/2d-sem-label-vaihingen.html)
+1. [Inria Aerial Image Labeling Dataset[1]](https://project.inria.fr/aerialimagelabeling/)
+2. [ISPRS Vaihingen Dataset[2]](http://www2.isprs.org/commissions/comm3/wg4/2d-sem-label-vaihingen.html)
 
 To be able to train and test the proposed network, first training, validation and test samples should be extracted from these datasets. Then the extracted samples must be stored in [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file to enable fast data access during training. The instruction required to generate the samples are provided in the following section:
 - [Generating training, validation and test samples](#1-generating-training,-validation-and-test-samples)
@@ -182,7 +182,7 @@ python main.py --experiment 2 --depth 50  --nChannelsIn 4 --nChannelsOut 6 --dat
 
 [[1] Maggiori, Emmanuel, et al. "Can semantic labeling methods generalize to any city? the inria aerial image labeling benchmark." IEEE International Symposium on Geoscience and Remote Sensing (IGARSS). 2017.](https://hal.inria.fr/hal-01468452/document)
 
-
+[[2] Cramer, Michael. "The DGPF-test on digital airborne camera evaluation–overview and test design." Photogrammetrie-Fernerkundung-Geoinformation 2010.2 (2010): 73-82.](https://www.ingentaconnect.com/content/schweiz/pfg/2010/00002010/00000002/art00003)
 
 
 
