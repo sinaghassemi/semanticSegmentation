@@ -94,6 +94,63 @@ After setting the flag ```set = 'test'```, in the "Configurations for each set" 
 
 
 # 2. Training the network
+
+After preparing '.h5' files for each dataset, we can proceed to train the network using a python [file](https://github.com/sinaghassemi/semanticSegmentation/blob/master/cnn/main.py).
+
+The file takes several arguments which defines network architecture, the dataset, training and optimization hyperparameters and so on which we describe some of these in the following:
+```python
+parser = argparse.ArgumentParser(description='PyTorch Satellite Segmentation')
+parser.add_argument('--seed'		, default= 1		, type=int	, metavar='N', help='Torch and NumPy pseudorandom number generators seed (-1 disables manual seeding)')
+parser.add_argument('--fileNameData'	, default=None		, type=str	, metavar='N', help='hdf5 file of the dataset, images file')
+parser.add_argument('--preload'		, default='true'	, type=str	, metavar='N', help='set to true to preload entire dataset into memory')
+parser.add_argument('--experiment'	, default='ex500'	, type=str	, metavar='N', help='Experiment Identifier')
+parser.add_argument('--batchSize'	, default=8		, type=int	, metavar='N', help='batch size')
+parser.add_argument('--imageSize'	, default=364		, type=int	, metavar='N', help='imageSize')
+parser.add_argument('--patchSize'	, default=256		, type=int	, metavar='N', help='imageSize')
+parser.add_argument('--nEpochs'		, default=300		, type=int	, metavar='N', help='total number of Epoches')
+parser.add_argument('--nChannelsIn'	, default=4		, type=int	, metavar='N', help='number of input Channels')
+parser.add_argument('--nChannelsOut'	, default=2		, type=int	, metavar='N', help='number of output Channels')
+parser.add_argument('--nThreads'	, default=1		, type=int	, metavar='N', help='number of threads for data loading')
+parser.add_argument('--depth'		, default=34		, type=int	, metavar='N', help='number of layers in encoder')
+parser.add_argument('--optim'		, default='SGD'		, type=str	, metavar='N', help='optimizer [SGD | adagrad]')
+parser.add_argument('--lr'		, default=1		, type=float	, metavar='N', help='learning rate strategy (SGD, >=1) or base value (Adagrad, any value)')
+parser.add_argument('--lrDecay'		, default=1		, type=float	, metavar='N', help='learning rate decay (Adagrad)')
+parser.add_argument('--weightDecay'	, default=1		, type=float	, metavar='N', help='weight rate decay (Adagrad)')
+parser.add_argument('--GPU'		, default=True		, type=bool	, metavar='N', help='training over GPU')
+parser.add_argument('--criterion'	, default='BCE'		, type=str	, metavar='N',choices=['2dNLL', 'BCE', 'MSE'], help='criterion')
+parser.add_argument('--finetuneModule'	, default=None		, type=str	, metavar='N', help='network needed to be fine-tunned')
+parser.add_argument('--testModule'	, default=None		, type=str	, metavar='N', help='running a testmodule over test areas')
+parser.add_argument('--set'	  	, default='train'	, type=str	, metavar='N', choices=['train', 'val', 'test']	,help='set')
+parser.add_argument('--dataset'	  	, default='isprs'	, type=str	, metavar='N', choices=['isprs','inria']	,help='dataset')
+parser.add_argument('--crf'	 	, default=False  	, type=bool	, metavar='N', help='conditional random field')
+parser.add_argument('--finetunedBN'	, default=False  	, type=bool	, metavar='N', help='fine tunning BN parameters  over test area')
+parser.add_argument('--resetBN'		, default=False  	, type=bool	, metavar='N', help='reseting BN')
+parser.add_argument('--BNFinetuningEpochs', default=1		, type=int	, metavar='N', help='BNFinetuningEpochs')
+```
+Total number of epochs are defined by ```nEpochs```, and the ```dataset``` can be chosen from ```['isprs','inria']```.
+Other arguments such as ```nChannelsIn, nChannelsOut, imageSize, patchSize ``` depends on the patch extraction settings and the dataset itself.
+``` lr, lrDecay, weightDecay, batchSize, optim``` indicates the training and optimization process.
+```depht``` can be selected from a the list of ```[18,34,50,101,152,200]```.
+```set``` by default is set to ```'train'``` and also caln be set to ```'val'``` and ```'test'```.
+
+For examples using the following commands in terminal:
+
+```bash
+python main.py --fileNameData inria.h5 --experiment 1 --depth 50 --imageSize 360 --patchSize 256 --nChannelsIn 3 --nChannelsOut 2 --dataset inria
+```
+Will train the network with 50 layers in encoder over INRIA dataset.
+
+Or running the following in terminal
+
+```bash
+python main.py --fileNameData vaihingen.h5 --experiment 2 --depth 50 --imageSize 364 --patchSize 256 --nChannelsIn 4 --nChannelsOut 6 --dataset isprs
+```
+will train the network over Vihingen city.
+
+
+
+
+
 ```bash
 INRIA TRAINING
 CUDA_VISIBLE_DEVICES=1 python main.py --fileNameData inria.h5 --experiment 1 --depth 50 --imageSize 360 --patchSize 256 --nChannelsIn 3 --nChannelsOut 2 --dataset inria
