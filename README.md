@@ -36,8 +36,8 @@ In first lines of the code, in the configuration section, there are some variabl
 
 ```matlab
 %% CONFIGURATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-path = '/AerialImageDataset/test/';     % Path to the data 
-set  = 'train';                         % set flag can be set to 'val' | 'train' | 'test' to generate the corresponding samples
+path = '/AerialImageDataset/train/';     % Path to the data 
+set  = 'train';                          % set flag can be set to 'val' | 'train' | 'test' to generate the corresponding samples
 
 % train and val = {'austin','chicago','kitsap','tyrol-w','vienna'}
 % test          = {'bellingham','bloomington','innsbruck','sfo','tyrol-e'}
@@ -48,15 +48,14 @@ datatype_patch = 'uint8';           % The data format
 datatype_label = 'uint8';           % The data format 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ```
-First the path to the dataset have to be assign to variable ```matlab path ```.
 For each city use for training/validatio, first train and then validation samples should be extracted.
-Note that mean and std of samples are compuited over training samples and also use for extracitng validation samples.
-This justify the first line in code:
-```matlab
-clearvars -except patchMean patchSTD
-```
-The training and validation samples of each city are stored in a separate file.
-Then this [code](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/combiningCitiesToADataset_inria.m)  is used to combine the samples of all cities into a single file.
+In the first run ```set  = 'train'```, training samples are generated in each city.
+Then in the second run ```set  = 'val'```  validation samples are extracted from the same city.
+These samples are stored in a file named after the city.
+
+After training and validation samples are extracted from each of the five cities and in five separate files,
+These files are combined together and stored in a single file using a MATLBA [code](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/combiningCitiesToADataset_inria.m).
+
 
 ### 1.1.2 Test
 
