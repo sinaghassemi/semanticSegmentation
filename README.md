@@ -5,13 +5,13 @@ The repository contains the codes addressing the semantic segmentation over remo
 2. [ISPRS Vaihingen Dataset](http://www2.isprs.org/commissions/comm3/wg4/2d-sem-label-vaihingen.html)
 
 To be able to train and test the proposed network, first training, validation and test samples should be extracted from these datasets. Then the extracted samples must be stored in [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file to enable fast data access during training. The instruction required to generate the samples are provided in the following section:
-- [Generating samples](#1-generating-training,-validation-and-test-samples)
+- [Generating training, validation and test samples](#1-generating-training,-validation-and-test-samples)
 
 Next, after the HDF5 files are prepared, we can proceed to train the proposed network using instructions provided at the following section:
-- [Training](#2-training-the-network)
+- [Training the network](#2-training-the-network)
 
 At the end, when the training course has been completed, the trained network can be deployed over test areas using the instruction in this following section:
-- [Testing](#3-testing-the-trained-network)
+- [Testing the network](#3-testing-the-trained-network)
 
 # Prerequesties
 - Computer with Linux
