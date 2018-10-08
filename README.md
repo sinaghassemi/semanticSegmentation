@@ -20,13 +20,13 @@ At the end, when the training course has been completed, the trained network can
 - NVIDIA GPU is highly recommended to speed up the training.
 
 # 1. Generating training, validation and test samples
-Two publicly available datasets are used in our experiments:
+Two publicly available datasets are used in our experiments which are acessible by requesting the official website linked at following:
 
 1. [Inria Aerial Image Labeling Dataset](https://project.inria.fr/aerialimagelabeling/)
 2. [ISPRS Vaihingen Dataset](http://www2.isprs.org/commissions/comm3/wg4/2d-sem-label-vaihingen.html)
 
-After requesting and downloading these datasets, the samples needed for training,validation or testing the network should be generated. These generated samples are stored in [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file enabling fast reading during training.
-The codes used to generate the datasets files are written in MATLAB and provided the following locations:
+The samples required for training,validation or testing the network should be generated and stored in [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file enabling fast reading during training.
+The codes used to generate the datasets files are written in MATLAB and due to the difference between data format between these two datsets, for each data set a seperate file is provided:
 1. [To generate samples of INRIA Dataset](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/GeneratingDataset_INRIA.m)
 2. [To generate samples of Vaihingen Dataset](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/GeneratingDataset_ISPRS.m)
 
