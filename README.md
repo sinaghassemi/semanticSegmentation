@@ -1,6 +1,9 @@
 # Semantic segmentation of remotely sensing images
 This repository provides the codes needed to address the semantic segmentation problem over two publicly available aerial images.
+
+
 -[Generating samples](#1-generating-samples-for-training/validation/test-sets)
+-[Generating ](####-1.2.2-test)
 
 ## Prerequesties
 - Computer with Linux
