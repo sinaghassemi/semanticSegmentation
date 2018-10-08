@@ -62,9 +62,9 @@ These files are combined together and stored in a single file using a MATLBA [co
 To generate the test samples enabling the evaluation of network performance, there are two choices: 1. using the validation images. 2. using the test images.
 Since the annotation of test images are not provided we can use validation images as test set to be able measure network performance. However, by using test images, and after the network output uploaded to the website, the corresponding analysis are given within few weeks by dataset providers.
 
-To generate test samples from validation images, 'set' should be set to 'test' ```set  = 'test'```, city can be used from the first set provided with annotation , and in the section "Configurations for each set" and the test configurations, ```areas=[1,2,3,4,5]``` and ```withAnnotation = 1```.
+To generate test samples from validation images, 'set' should be set to 'test' ```set  = 'test'```, city can be chosen from the first set that provided with annotation ```city = 'austin' %{'austin','chicago','kitsap','tyrol-w','vienna'}```, and in the section "Configurations for each set" and the test configurations, ```areas=[1,2,3,4,5]``` and ```withAnnotation = 1```.
 
-To generate test samples from test images, 'set' should be set to 'test' ```set  = 'test'```, city can be used from the second set which are not provided with annotation , and in the section "Configurations for each set" and the test configurations, ```areas=[1,2,...,36]``` and ```withAnnotation = 0```.
+To generate test samples from test images, 'set' should be set to 'test' ```set  = 'test'```, city can be chosen from the second set which are not provided with annotation ```city = 'bellingham' %{'bellingham','bloomington','innsbruck','sfo','tyrol-e'}```, and in the section "Configurations for each set" and the test configurations, ```areas=[1,2,...,36]``` and ```withAnnotation = 0```.
 
 
 ## 1.2 Generating samples of ISPRS Vaihigen dataset
