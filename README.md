@@ -21,18 +21,18 @@ At the end, when the training course has been completed, the trained network can
 
 # 1. Generating training, validation and test samples
 
-The samples required for training,validation or testing the network should be generated and stored in [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file enabling fast reading during training.
+The samples required for training, validation or testing the network should be generated and stored in [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file enabling fast reading during training.
 The codes used to generate the dataset files are written in MATLAB and provided each dataset.
 
 
-## 1.2 Training and validation (INRIA datset)
-Training and validation samples are generate over five cities of Austin, Chicago ,Kitsap County ,Western Tyrol
+## 1.2 Training and validation samples (INRIA datset)
+Training and validation samples are generated over five cities of Austin, Chicago, Kitsap County, Western Tyrol
 and Vienna using the MATLAB [code](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/GeneratingDataset_INRIA.m).
 
 Each city includes 36 images sized 5000×5000 which covers a surface of 1500 m × 1500 m at the 30 cm resolution.
-Based on recommnedation of the dataset providers, we use the first five images of each city for extracting validation samples and the rest for training samples.
+Based on what dataset providers recommended, we use the first five images of each city for extracting validation samples and the other images for training samples.
 
-In first lines of the code, in the configuration section, there are some variable that should be set.  
+In first lines of the code, in the configuration section, there are variables that should be set to extarcted training, validation and test samples.  
 
 ```matlab
 %% CONFIGURATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -48,21 +48,24 @@ datatype_patch = 'uint8';           % The data format
 datatype_label = 'uint8';           % The data format 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ```
-For each city use for training/validatio, first train and then validation samples should be extracted.
+For each city use for training, first train and then validation samples are extracted.
 In the first run ```set  = 'train'```, training samples are generated in each city.
 Then in the second run ```set  = 'val'```  validation samples are extracted from the same city.
-These samples are stored in a file named after the city.
+These samples are then stored in a '.h5' file named after the city.
 
 After training and validation samples are extracted from each of the five cities and in five separate files,
 These files are combined together and stored in a single file using a MATLBA [code](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/combiningCitiesToADataset_inria.m).
 
 
-### 1.1.2 Test
+## 1.2 Test samples (INRIA datset)
 
-To generate the test samples enabling the evaluation of network performance, there are two choices: using the validation images. using the test images.
-Since the annotation of test images are not provided we can use validation images as test set to be able measure network performance. However, by using test images, the network outputs should sent to dataset provider for analysis.
-By setting the flag 'set' to 'test' and using validation areas and setting the flag 'withAnnotation' to 1, test samples are generated from validation images.
-While using test areas and setting the flag 'withAnnotation' to 0, test samples are generated from test images.
+To generate the test samples enabling the evaluation of network performance, there are two choices: 1. using the validation images. 2. using the test images.
+Since the annotation of test images are not provided we can use validation images as test set to be able measure network performance. However, by using test images, and after the network output uploaded to the website, the corresponding analysis are given within few weeks by dataset providers.
+
+To generate test samples from validation images, 'set' should be set to 'test' ```set  = 'test'```, city can be used from the first set provided with annotation , and in the section "Configurations for each set" and the test configurations, ```areas=[1,2,3,4,5]``` and ```withAnnotation = 1```.
+
+To generate test samples from test images, 'set' should be set to 'test' ```set  = 'test'```, city can be used from the second set which are not provided with annotation , and in the section "Configurations for each set" and the test configurations, ```areas=[1,2,...,36]``` and ```withAnnotation = 0```.
+
 
 ## 1.2 Generating samples of ISPRS Vaihigen dataset
 
