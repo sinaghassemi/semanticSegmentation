@@ -32,7 +32,7 @@ clearvars -except patchMean patchSTD
 
 
 %% CONFIGURATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-path = '/AerialImageDataset/test/';     % Path to the data 
+path = '/AerialImageDataset/train/';     % Path to the data 
 set  = 'train';                         % set flag can be set to 'val' | 'train' | 'test' to generate the corresponding samples
 
 % train and val = {'austin','chicago','kitsap','tyrol-w','vienna'}
