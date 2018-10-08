@@ -9,13 +9,13 @@ This repository provides the codes needed to address the semantic segmentation p
 - Computer with Linux
 - [MATLAB](https://www.mathworks.com/)
 - [PyTorch](https://pytorch.org/)
-- NVIDIA GPU is highly recommended particularly to speed up the training.
+- NVIDIA GPU is highly recommended to speed up the training.
 
 # 1. Generating samples for training/validation/test sets
 Two publicly available datasets are used in our experiments:
 
 1. [Inria Aerial Image Labeling Dataset](https://project.inria.fr/aerialimagelabeling/)
-2. [ISPRS Vaihingen data](http://www2.isprs.org/commissions/comm3/wg4/2d-sem-label-vaihingen.html)
+2. [ISPRS Vaihingen Dataset](http://www2.isprs.org/commissions/comm3/wg4/2d-sem-label-vaihingen.html)
 
 After requesting and downloading these datasets, the samples needed for training,validation or testing the network should be generated. These generated samples are stored in [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file enabling fast reading during training.
 The codes used to generate the datasets files are written in MATLAB and provided the following locations:
