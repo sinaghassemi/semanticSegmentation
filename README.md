@@ -181,9 +181,9 @@ The predicted segmentation map over an image of INRIA testset:
 ![sfo](images/sfo.png "The predicted segmentation map over an image of INRIA testset")
 
 
-
 The predicted segmentation map over an image of Vaihingen testset:
  
+![vai](images/vaihingen.png "The predicted segmentation map over an image of Vaihingen testset")
 
 
 # References
