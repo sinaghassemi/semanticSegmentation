@@ -178,7 +178,7 @@ python main.py --experiment 2 --depth 50  --nChannelsIn 4 --nChannelsOut 6 --dat
 ## Some Examples
 The predicted segmentation map over an image of INRIA testset:
 
-![sfo](images/sfo.png =250x250 )
+![sfo](images/sfo.png)
 
 
 The predicted segmentation map over an image of Vaihingen testset:
