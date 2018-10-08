@@ -24,9 +24,8 @@
 
 clearvars -except patchMean patchSTD
 % To generate train and validation samples, first the training samples should be extracted (set  = 'train'),
-% In which mean and std of samples are computed, then the validation samples are extracted (set  = 'val'),
-% As a result "clearvars -except patchMean patchSTD" prevents removing mean and std which are computed in first run,
-% And these values are also used in the second run.
+% Then the validation samples are extracted (set  = 'val'),
+% Therefore mean and std are computed over training samples which includes much bigger area compared to validation.
 
 
 %% CONFIGURATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
