@@ -22,21 +22,15 @@ At the end, when the training course has been completed, the trained network can
 # 1. Generating training, validation and test samples
 
 The samples required for training,validation or testing the network should be generated and stored in [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file enabling fast reading during training.
-The codes used to generate the dataset files are written in MATLAB and provided each dataset:
-1. [To generate samples of INRIA Dataset](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/GeneratingDataset_INRIA.m)
-2. [To generate samples of Vaihingen Dataset](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/GeneratingDataset_ISPRS.m)
+The codes used to generate the dataset files are written in MATLAB and provided each dataset.
 
 
-## 1.1 Generating samples of INRIA dataset
-INRIA dataset includes 5 cities for train and validation samples and another 5 cities for the test samples.
-We invite readers interested in more details to refer to this [link](https://project.inria.fr/aerialimagelabeling/contest/).
+## 1.2 Training and validation (INRIA datset)
+Training and validation samples are generate over five cities of Austin, Chicago ,Kitsap County ,Western Tyrol
+and Vienna using the MATLAB [code](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/GeneratingDataset_INRIA.m).
 
-
-
-### 1.1.1 Training and validation
-The generate the training and validation samples we developed following MATLAB [code](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/GeneratingDataset_INRIA.m) .
-
-For cities in the first set (Austin, Chicago, Kitsap County, Western Tyrol, Vienna) , we use the first five images of each city for extracting validation samples and the rest for training samples.
+Each city includes 36 images sized 5000×5000 which covers a surface of 1500 m × 1500 m at the 30 cm resolution.
+Based on recommnedation of the dataset providers, we use the first five images of each city for extracting validation samples and the rest for training samples.
 
 In first line of the code, the path to inria images shoud be defined, next the variable 'set' should be set to 'train' and then city should be selected. 
 
