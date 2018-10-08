@@ -3,7 +3,7 @@ This repository provides the codes needed to address the semantic segmentation p
 
 
 - [Generating samples](#1-generating-samples-for-training/validation/test-sets)
-- [Generating ](####-122-test)
+- [Training](#2-training-the-network)
 
 # Prerequesties
 - Computer with Linux
@@ -66,7 +66,7 @@ While using test areas and setting the flag 'withAnnotation' to 0, test samples 
 ### 1.2.2 Test
 
 
-## Training/Testing the network
+# 2. Training the network
 ```bash
 INRIA TRAINING
 CUDA_VISIBLE_DEVICES=1 python main.py --fileNameData inria.h5 --experiment 1 --depth 50 --imageSize 360 --patchSize 256 --nChannelsIn 3 --nChannelsOut 2 --dataset inria
