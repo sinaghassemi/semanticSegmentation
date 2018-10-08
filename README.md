@@ -1,5 +1,5 @@
 # Semantic segmentation of remotely sensing images
-This repository contains the codes to address the semantic segmentation over remotely sensing images and on two publicly available aerial images:
+The repository contains the codes addressing the semantic segmentation over remotely sensing images and on two publicly available aerial images:
 
 1. [Inria Aerial Image Labeling Dataset](https://project.inria.fr/aerialimagelabeling/)
 2. [ISPRS Vaihingen Dataset](http://www2.isprs.org/commissions/comm3/wg4/2d-sem-label-vaihingen.html)
