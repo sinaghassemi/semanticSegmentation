@@ -3,7 +3,7 @@ This repository provides the codes needed to address the semantic segmentation p
 
 
 -[Generating samples](#1-generating-samples-for-training/validation/test-sets)
--[Generating ](####-1.2.2-test)
+-[Generating ](####-122-test)
 
 ## Prerequesties
 - Computer with Linux
