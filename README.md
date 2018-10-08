@@ -25,7 +25,7 @@ The samples required for training, validation or testing the network should be g
 The codes used to generate the dataset files are written in MATLAB and provided each dataset.
 
 
-## 1.2 Training and validation samples (INRIA datset)
+## 1.1 Training and validation samples (INRIA datset)
 Training and validation samples are generated over five cities of Austin, Chicago, Kitsap County, Western Tyrol
 and Vienna using the MATLAB [code](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/GeneratingDataset_INRIA.m).
 
