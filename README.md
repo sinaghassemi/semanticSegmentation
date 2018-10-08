@@ -1,10 +1,10 @@
 # Semantic segmentation of remotely sensing images
-This repository contains the codes which address the semantic segmentation on remotely sensing images and over two publicly available aerial images:
+This repository contains the codes to address the semantic segmentation over remotely sensing images and on two publicly available aerial images:
 
 1. [Inria Aerial Image Labeling Dataset](https://project.inria.fr/aerialimagelabeling/)
 2. [ISPRS Vaihingen Dataset](http://www2.isprs.org/commissions/comm3/wg4/2d-sem-label-vaihingen.html)
 
-To be able to train and test the proposed network, first training, validation and test samples should be extracted from these datasets. Then the extracted samples must stored in [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file which enables fast data reading during training. The instruction required to generate the samples are provided in the following section:
+To be able to train and test the proposed network, first training, validation and test samples should be extracted from these datasets. Then the extracted samples must be stored in [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file to enable fast data access during training. The instruction required to generate the samples are provided in the following section:
 - [Generating samples](#1-generating-training,-validation-and-test-samples)
 
 Next, after the HDF5 files are prepared, we can proceed to train the proposed network using instructions provided at the following section:
