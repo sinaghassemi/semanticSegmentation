@@ -178,7 +178,7 @@ python main.py --experiment 2 --depth 50  --nChannelsIn 4 --nChannelsOut 6 --dat
 ## Some Examples
 
 
-# Reference
+# References
 
 [[1] Maggiori, Emmanuel, et al. "Can semantic labeling methods generalize to any city? the inria aerial image labeling benchmark." IEEE International Symposium on Geoscience and Remote Sensing (IGARSS). 2017.](https://hal.inria.fr/hal-01468452/document)
 
