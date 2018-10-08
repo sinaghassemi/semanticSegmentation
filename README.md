@@ -67,7 +67,7 @@ To generate test samples from validation images, 'set' should be set to 'test' `
 To generate test samples from test images, 'set' should be set to 'test' ```set  = 'test'```, city can be chosen from the second set which are not provided with annotation ```city = 'bellingham' %{'bellingham','bloomington','innsbruck','sfo','tyrol-e'}```, and in the section "Configurations for each set" and the test configurations, ```areas=[1,2,...,36]``` and ```withAnnotation = 0```.
 
 
-## 1.3 Training and validation (ISPRS Vaihingen)
+## 1.3 Training and validation samples (ISPRS Vaihingen)
 For this dataset, the city of Vaihingen is selected to extracted training, validation and also test samples.
 The city is divided into two sets, one is provided with annotations and used to extract training and validation samples while the second set are not provided with annotation and used to generate test samples.
 
@@ -85,7 +85,7 @@ DataFormat = 'uint8';
 First traning samples are extracted ```set = 'train'``` and the validation samples are generated ```set = 'val'```.
 
 
-## 1.4 Test (ISPRS Vaihingen)
+## 1.4 Test samples (ISPRS Vaihingen)
 
 The same as INRIA dataset, since a set of images are not provided with annotations and reserved as test set, and they can be extracted by setting the flag ```set = 'test'```. The network output then should be sent to dataset organizer for further assessments.
 
