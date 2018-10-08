@@ -32,7 +32,7 @@ and Vienna using the MATLAB [code](https://github.com/sinaghassemi/semanticSegme
 Each city includes 36 images sized 5000×5000 which covers a surface of 1500 m × 1500 m at the 30 cm resolution.
 Based on what dataset providers recommended, we use the first five images of each city for extracting validation samples and the other images for training samples.
 
-In first lines of the code, in the configuration section, there are variables that should be set to extarcted training, validation and test samples.  
+In the configuration section, there are arguments that should be set to extracted training, validation and test samples.  
 
 ```matlab
 %% CONFIGURATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -68,7 +68,7 @@ To generate test samples from test images, 'set' should be set to 'test' ```set 
 
 
 ## 1.3 Training and validation (ISPRS Vaihingen)
-For this dataset, the city of Vaihingen is selected to extracted traning, validation and also test samples.
+For this dataset, the city of Vaihingen is selected to extracted training, validation and also test samples.
 The city is divided into two sets, one is provided with annotations and used to extract training and validation samples while the second set are not provided with annotation and used to generate test samples.
 
 Using a MTALAB [code](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/GeneratingDataset_ISPRS.m)
@@ -87,10 +87,10 @@ First traning samples are extracted ```set = 'train'``` and the validation sampl
 
 ## 1.4 Test (ISPRS Vaihingen)
 
-The same as INRIA dataset, since a set of images are not provided with annotations and reserved as test set, and they can be extracted by setting the falg ```set = 'test'```. The network outout then should be sent to dataset organizer for further assessments.
+The same as INRIA dataset, since a set of images are not provided with annotations and reserved as test set, and they can be extracted by setting the flag ```set = 'test'```. The network output then should be sent to dataset organizer for further assessments.
 
 However, also it is possible to extracted test samples from validation areas.
-After setting the flag ```set = 'test'```, in the "Configurations for each set" section and in the test part, ``` area = [11,15,28,30,34] ``` defines the test areas to be the same as validation areas, then the flage ```  withAnnotation = 1 ``` indicates the this set should be extarcted with annotation. Therefore we can measure the network performance using the provided annotations and over validation images.
+After setting the flag ```set = 'test'```, in the "Configurations for each set" section and in the test part, ``` area = [11,15,28,30,34] ``` defines the test areas to be the same as validation areas, then the flag ```  withAnnotation = 1 ``` indicates the this set should be extracted with annotation. Therefore we can measure the network performance using the provided annotations and over validation images.
 
 
 # 2. Training the network
@@ -131,7 +131,7 @@ Total number of epochs are defined by ```nEpochs```, and the ```dataset``` can b
 Other arguments such as ```nChannelsIn, nChannelsOut, imageSize, patchSize ``` depends on the patch extraction settings and the dataset itself.
 ``` lr, lrDecay, weightDecay, batchSize, optim``` indicates the training and optimization process.
 ```depht``` can be selected from a the list of ```[18,34,50,101,152,200]```.
-```set``` by default is set to ```'train'``` and also caln be set to ```'val'``` and ```'test'```.
+```set``` by default is set to ```'train'``` and also can be set to ```'val'``` and ```'test'```.
 
 For examples using the following commands in terminal:
 
@@ -149,7 +149,7 @@ to train the network over Vihingen city.
 
 # 3. Testing the trained network
 
-After training has been completed, it can be evaluted over validation images or test images.
+After training has been completed, it can be evaluated over validation images or test images.
 
 For instance, running the following 
 ```bash
@@ -162,7 +162,7 @@ Or:
 ```bash
 python main.py --experiment 2 --depth 50  --nChannelsIn 4 --nChannelsOut 6 --dataset isprs --testModule ex2_bestNet_valF1.pt --set val --batchSize 4
 ```
-Evalute the trained network of ```ex2_bestNet_valF1.pt``` over validation set of Vaihingen city.
+Evaluate the trained network of ```ex2_bestNet_valF1.pt``` over validation set of Vaihingen city.
 
 
 To test the network and generate the outputs over testset and for INRIA and Vaihingen datasets:
