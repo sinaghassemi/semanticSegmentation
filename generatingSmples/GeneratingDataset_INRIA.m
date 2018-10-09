@@ -21,15 +21,10 @@
 % STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 % EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-
-
 clearvars -except patchMean patchSTD  
 % To generate train and validation samples, first the training samples should be extracted (set  = 'train'),
 % Then the validation samples are extracted (set  = 'val'),
 % Therefore mean and std are computed over training samples which includes much bigger area compared to validation.
-
-
 
 %% CONFIGURATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 path = '/AerialImageDataset/train/';     % Path to the data 
@@ -47,12 +42,9 @@ NrTemp = 1500;
 patches=[];
 information=[];
 masks=[];
-
-
 %% Configurations for each set %%%%%%%%%%%%%%%%%%%%%%%%%
 
 % For each set different configurations are used
-
 if strcmp(set,'train')
     areas=[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]; % Training areas
     hdf5_data='/train_data';
@@ -63,7 +55,6 @@ if strcmp(set,'train')
     withAnnotation = 1;
     numberOfIteration = 1;
 end
-
 if strcmp(set,'val')
     areas=[1,2,3,4,5]; % Validation areas
     hdf5_data='/val_data';
@@ -74,7 +65,6 @@ if strcmp(set,'val')
     withAnnotation = 1;
     numberOfIteration = 1;
 end
-
 if strcmp(set,'test')
     areas=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]; % Test areas
     hdf5_data='/data';
@@ -87,42 +77,28 @@ if strcmp(set,'test')
     numberOfIteration = 2;
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
 chunkSizeData=[chunkSize 3 patchSize patchSize];
 chunkSizeMask=[chunkSize patchSize patchSize];
-
-
-%% Only for test and train set mean and std are used, for validation mean and std of training samples are used.
+%% Only for test and train set mean and std are computed, for validation mean and std of training samples are used.
 if strcmp(set,'test') || strcmp(set,'train')
     patchMean = [0 0 0];
     patchSTD = [1 1 1];
 end
 
-
-
-
 for iteration = 1:numberOfIteration
-
     for area_index=1:size(areas,2)
         area=areas(area_index)
         %% Reading the file %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         sprintf('reading Channels:')
         [imageData,~] = geotiffread(strcat(path,'images/',city,int2str(area),'.tif'));
-
         if ~ withAnnotation 
              m=zeros(5000,5000);
              m=uint8(m);
         else
              [m,~] = geotiffread(strcat(path,'gt/',city,int2str(area),'.tif'));
         end
-
         m = m/255; %convert 0 and 255 to 0 and 1
-
         sprintf('reading done.')
-        
         %% Showing the image with labeled buildings %%%%%%%%
         im(:,:,:)=imageData(:,:,1:3);
         im(:,:,3)=im(:,:,3) + m*256;
@@ -130,7 +106,6 @@ for iteration = 1:numberOfIteration
         imshow(im)
         % pause()
         clear im
-
         %% computing translations to cover whole image %%%%%%%%%
         heightofArea = size(imageData,1); 
         widthofArea  = size(imageData,2);
@@ -143,7 +118,6 @@ for iteration = 1:numberOfIteration
         translation_w = translation;
         %%%  extracting whole image
         [ patches_temp,masks_temp,information] = ExtractPatches({imageData(:,:,1),imageData(:,:,2),imageData(:,:,3)},m,patchSize,translation_h,translation_w,NrTemp,datatype_patch,datatype_label);
-
         %% Show image with extracted patches%%%%%%%%%%%%%%%%%%%%%
         im(:,:,:)=imageData(:,:,1:3);
         im(:,:,3)=im(:,:,3) + m*256;
@@ -156,7 +130,6 @@ for iteration = 1:numberOfIteration
         masks=cat(1,masks,masks_temp);
         %% Test Patches %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         if strcmp(set,'test')
-
             % First iteration : Computing patchMean and Patchstd over test area
             if area_index==size(areas,2) && iteration == 1
                 sprintf('The end of first iteration: Computing mean and std')
@@ -166,10 +139,7 @@ for iteration = 1:numberOfIteration
                     patchSTD(i)= std(p(:))
                 end
             end
-
             clear p
-
-
             %  Second iteration : Writing to HDF5 data and std and mean
             if iteration == 2
                 if  withAnnotation 
@@ -185,19 +155,11 @@ for iteration = 1:numberOfIteration
                 h5write(hdf5Filename, '/std', patchSTD)
             end
         end
-
-
-
     end
-
-
 end
-
-
 %% Train and Val %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if strcmp(set,'train') || strcmp(set,'val')
-
     % Computing Mean and STD
       if strcmp(set,'train')
             for i=1:3
@@ -211,28 +173,17 @@ if strcmp(set,'train') || strcmp(set,'val')
         h5create(hdf5Filename,'/std' , size(patchSTD),'Datatype','double')
         h5write(hdf5Filename, '/mean', patchMean)
         h5write(hdf5Filename, '/std', patchSTD)  
-            
       end
-      
-
     % Random Permutation
         NrSampels=size(patches,1);
         rndIndex=randperm(NrSampels);
         patches=patches(rndIndex,:,:,:);
         masks=masks(rndIndex,:,:,:);
-        
         size(patches)
         size(masks)
-
     %  Writing to HDF5
         h5create(hdf5Filename,hdf5_data, size(patches),'Datatype',datatype_patch,'ChunkSize',chunkSizeData)
         h5create(hdf5Filename,hdf5_mask, size(masks),'Datatype',datatype_label,'ChunkSize',chunkSizeMask)
         h5write(hdf5Filename, hdf5_data, patches)
-        h5write(hdf5Filename, hdf5_mask, masks)    
-        
+        h5write(hdf5Filename, hdf5_mask, masks)          
 end
-
-
-
-
-    
