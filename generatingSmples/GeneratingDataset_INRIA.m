@@ -27,13 +27,13 @@ clearvars -except patchMean patchSTD
 % Therefore mean and std are computed over training samples which includes much bigger area compared to validation.
 
 %% CONFIGURATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-path = '/AerialImageDataset/train/';     % Path to the data 
+path = '/home/sina/satteliteImage/AerialImageDataset/train';     % Path to the data 
 set  = 'train';                         % set flag can be set to 'val' | 'train' | 'test' to generate the corresponding samples
 
 % train and val = {'austin','chicago','kitsap','tyrol-w','vienna'}
 % test          = {'bellingham','bloomington','innsbruck','sfo','tyrol-e'}
 
-city = 'bellingham';                % can be selected from the list above
+city = 'austin';                % can be selected from the list above
 hdf5Filename = strcat(city,'.h5');  % The h5 file in which samples will be stored         
 datatype_patch = 'uint8';           % The data format 
 datatype_label = 'uint8';           % The data format 
@@ -90,12 +90,12 @@ for iteration = 1:numberOfIteration
         area=areas(area_index)
         %% Reading the file %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         sprintf('reading Channels:')
-        [imageData,~] = geotiffread(strcat(path,'images/',city,int2str(area),'.tif'));
+        imageData = imread(strcat(path,'/images/',city,int2str(area),'.tif'));
         if ~ withAnnotation 
              m=zeros(5000,5000);
              m=uint8(m);
         else
-             [m,~] = geotiffread(strcat(path,'gt/',city,int2str(area),'.tif'));
+             [m,~] = imread(strcat(path,'/gt/',city,int2str(area),'.tif'));
         end
         m = m/255; %convert 0 and 255 to 0 and 1
         sprintf('reading done.')
