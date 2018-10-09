@@ -54,7 +54,7 @@ Then in the second run ```set  = 'val'```  validation samples are extracted from
 These samples are then stored in a '.h5' file named after the city.
 
 After training and validation samples are extracted from each of the five cities and in five separate files,
-These files are combined together and stored in a single file using a MATLBA [code](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/combiningCitiesToADataset_inria.m).
+These files are combined together and stored in a single file using a MATLAB [code](https://github.com/sinaghassemi/semanticSegmentation/blob/master/generatingSmples/combiningCitiesToADataset_inria.m).
 
 
 ## 1.2 Test samples (INRIA datset)
