@@ -26,27 +26,19 @@ clearvars -except patchMean patchSTD
 % To generate train and validation samples, first the training samples should be extracted (set  = 'train'),
 % Then the validation samples are extracted (set  = 'val'),
 % Therefore mean and std are computed over training samples which includes much bigger area compared to validation.
-
-
 %% CONFIGURATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 folderPath ='/ISPRS_semantic_labeling_Vaihingen';	% Path to the data 
 set = 'train'; 						%  set flag can be set to 'val' | 'train' | 'test' to generate the corresponding samples
 hdf5Filename ='vaihingen.h5';				% The h5 file in which samples will be stored  
 DataFormat = 'uint8'; 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 nClasses = 6;        
 NrTemp = 500; 
 patches=[];
 information=[];
 masks=[];
-
-
 %% Configurations for each set %%%%%%%%%%%%%%%%%%%%%%%%%
-
 % For each set different configurations are used
-
-
 if strcmp(set,'train')
     area = [1,3,5,7,13,17,21,23,26,32,37]; %Training areas
     hdf5_data='/train_data';
@@ -56,7 +48,6 @@ if strcmp(set,'train')
     chunkSize=32;
     withAnnotation = 1;
 end
-
 if strcmp(set,'val')
     area = [11,15,28,30,34]; % Validation areas
     hdf5_data='/val_data';
@@ -66,7 +57,6 @@ if strcmp(set,'val')
     chunkSize=32;
     withAnnotation = 1;
 end
-
 if strcmp(set,'test')
     area = [2,4,6,8,10,12,14,16,20,22,24,27,29,31,33,35,38]; % Test areas
     hdf5_data='/data';
@@ -78,12 +68,8 @@ if strcmp(set,'test')
     withAnnotation = 0;
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 chunkSizeData=[chunkSize 4 patchSize patchSize];
 chunkSizeMask=[chunkSize patchSize patchSize];
-
-
 for area_index=1:size(area,2) 
     %% Reading the file %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     sprintf('reading Channels:')
@@ -146,14 +132,12 @@ for area_index=1:size(area,2)
         % Test Patches
             patchMean = [0 0 0 0];
             patchSTD = [1 1 1 1];
-
         % Computing patchMean and Patchstd over test area
             for i=1:4
                 p=single(patches(:,i,:,:));
                 patchMean(i)=mean(p(:))
                 patchSTD(i)= std(p(:))
             end
-
         %  Writing to HDF5 data and std and mean
             datatype=DataFormat;
             hdf5Filename=strcat('isprs_vaihingen',int2str(area(area_index)),'_test.h5');%isprs_vaihingen28_test.h5
@@ -169,8 +153,6 @@ for area_index=1:size(area,2)
     clear r g b m a
     clear im temp_data temp_mask temp_information
 end
-
-
 % Train and Val %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if strcmp(set,'train') || strcmp(set,'val')
@@ -183,24 +165,19 @@ if strcmp(set,'train') || strcmp(set,'val')
             p=single(patches(:,i,:,:));
             patchMean(i)=mean(p(:))
             patchSTD(i)=std(p(:))
-        end
-    
+        end   
 % writing mean and std
 	h5create(hdf5Filename,'/mean', size(patchMean),'Datatype','double')
 	h5create(hdf5Filename,'/std' , size(patchSTD),'Datatype','double')
 	h5write(hdf5Filename, '/mean', patchMean)
 	h5write(hdf5Filename, '/std', patchSTD)  
    end
-
     clear temp_data temp_mask temp_information
-
 % Random Permutation
     NrSampels=size(patches,1);
     rndIndex=randperm(NrSampels);
     patches=patches(rndIndex,:,:,:);
     masks=masks(rndIndex,:,:);
-    
-    
 %  Writing to HDF5
     h5create(hdf5Filename,hdf5_data, size(patches),'Datatype',DataFormat,'ChunkSize',chunkSizeData)
     h5create(hdf5Filename,hdf5_mask, size(masks),'Datatype',DataFormat,'ChunkSize',chunkSizeMask)
