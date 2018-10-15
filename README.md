@@ -1,4 +1,4 @@
-# Semantic segmentation of remotely sensing images
+# Semantic Segmentation of Remotely Sensing Images
 The repository contains the codes addressing the semantic segmentation over remotely sensing images on two publicly available aerial images:
 
 1. [Inria Aerial Image Labeling Dataset [1]](https://project.inria.fr/aerialimagelabeling/)
@@ -22,7 +22,7 @@ At the end, when the training course has been completed, the trained network can
 # 1. Generating training, validation and test samples
 
 The samples required for training, validation or testing the network should be generated and stored in [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file enabling fast reading during training.
-The codes used to generate the dataset files are written in MATLAB and provided each dataset.
+The codes used to generate the dataset files are written in MATLAB and provided for each dataset.
 
 
 ## 1.1 Training and validation samples (INRIA datset)
